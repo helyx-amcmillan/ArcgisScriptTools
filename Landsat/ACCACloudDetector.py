@@ -108,6 +108,12 @@ def ACCACloudDetector(L7bands, pixelvalue, OutputPath,MetaData="",SaveRefl=False
         #if the pixel values are in Reflectance, the bands are directly inputed in the algorithm
         for i,pathname in enumerate(L7bands):
             exec("Band{0}=arcpy.Raster(pathname)".format(["2","3","4","5","6"][i]))
+            
+        #if ReflOutputFolder is not provided, one is generated using the OutputPath
+        if not ReflOutputFolder:
+            ReflOutputPath="\\".join(OutputPath.split("\\")[0:-1])
+        else:
+            ReflOutputPath=ReflOutputFolder
 
 
     #Establishing location of gaps in data. 0= Gap, 1=Data
